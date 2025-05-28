@@ -1,0 +1,154 @@
+{
+    "subscription_service": {
+        "hostname":"0.0.0.0",
+        "port": 8671,
+        "cors_enabled": true,
+        "allowed_domains":["*"],
+        "rsa_enabled": true
+    },
+    "database":{
+        "hostname":"your-host",
+        "port":8672,
+        "name":"njoy_subscription_service",
+        "page_size": 15,
+        "admin":{
+            "username":"root",
+            "password":"verysecret"
+        },
+        "user":{
+            "username":"guest",
+            "password":"secret"
+        },
+        "tables": [
+            {
+                "name":"subscriptions",
+                "fields":[
+                    {
+                        "name":"id",
+                        "type":"varchar(32)",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"user_id",
+                        "type":"varchar(32)",
+                        "std":"not null"
+                    },
+                    {
+                        "name": "item_id",
+                        "type": "varchar(32)",
+                        "std":"not null"
+                    },
+                    {
+                        "name": "payed_amount",
+                        "type": "float",
+                        "std":"not null"
+                    },
+                    {
+                        "name": "payed_currency",
+                        "type": "varchar(4)",
+                        "std":"not null"
+                    },
+                    {
+                        "name": "resource_type",
+                        "type": "varchar(32)",
+                        "std":"not null"
+                    },
+                    {
+                        "name": "event_type",
+                        "type": "varchar(64)",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"created_at",
+                        "type": "datetime",
+                        "std": "not null"
+                    },
+                    {
+                        "name":"updated_at",
+                        "type": "datetime",
+                        "std": "not null"
+                    },
+                    {
+                        "name":"active_till",
+                        "type": "datetime",
+                        "std": "not null"
+                    },
+                    {
+                        "name":"soft_delete",
+                        "type": "bool",
+                        "std":"default 0"
+                    }
+                ]
+            }
+        ],
+        "serviceTables": [
+            {
+                "name":"serviceState",
+                "fields":[
+                    {
+                        "name":"id",
+                        "type":"int",
+                        "std":"auto_increment primary key"
+                    },
+                    {
+                        "name":"name",
+                        "type":"varchar(128)",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"value",
+                        "type":"varchar(1024)",
+                        "std":""
+                    },
+                    {
+                        "name":"comment",
+                        "type":"varchar(1024)",
+                        "std":""
+                    },
+                    {
+                        "name":"datetime",
+                        "type": "datetime",
+                        "std": "not null"
+                    },
+                    {
+                        "name":"soft_delete",
+                        "type": "bool",
+                        "std":"default 0"
+                    }
+                ]
+            }
+        ]
+    },
+    "roles":{
+        "administrator":"administrator",
+        "moderator":"moderator",
+        "user":"user",
+        "guest":"guest"
+    },
+    "limits":{
+        "request_limit":{
+            "guest":1000,
+            "user":10000,
+            "moderator":"~~",
+            "administrator":"~~"
+        }
+    },
+    "security":{
+        "keys":{
+            "key_directory": "/backend_shared/security/.keys",
+            "public_key_path": "/backend_shared/security/.keys/public_key.pem",
+            "private_key_path": "/backend_shared/security/.keys/private_key.pem"
+        }
+    },
+    "verwaltung":{
+        "admin":{
+            "username":"admin",
+            "password":"verysecret",
+            "email":"info@your-host.com"
+        }
+    },
+    "data":{
+        "path":"data"
+    },
+    "debug":false
+}
